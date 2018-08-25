@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  {% load staticfiles %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -27,43 +26,26 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ml-auto">
           <a class="nav-item nav-link" href="#">Twitter</a>
-          <a class="nav-item nav-link" href="{% static 'rrudzinski_GIS_resume.pdf' %}">Resume</a>
-          <a class="nav-item nav-link" href="#">Blog</a>
+          <a class="nav-item nav-link" href="#">Resume</a>
+          <a class="nav-item nav-link active" href="#">Blog</a>
         </div>
       </div>
     </nav>
   </header>
 
   <main role="main">
-
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">Hi, I'm Rafal</h1>
-        <p class="lead text-muted">I am a full stack web developer</p>
-        <img src="{% static 'brooke.jpg' %}" alt="rafal-brooke" height="300px">
-        <p>
-          <a href="mailto:rrudziskipl@gmail.com" class="btn btn-primary my-2">Email Me</a>
-        </p>
+    <div class="container">
+      <h1 class="text-center pt-3">Welcome to Rafal's Blog</h1>
+      <h2>Latest Posts</h2>
+      <hr> {% for blog in blogs.all %}
+      <div>
+        <a href="#"><h3>{{ blog.title }}</h3></a>
+        <p>{{ blog.pub_date_pretty }}</p>
+        <img src="{{ blog.image.url }}" alt="blog-image" height="200" width="200" class="img-fluid" />
+        <p class="mt-3">{{ blog.summary }}</p>
       </div>
-    </section>
-
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          {% for job in jobs.all %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img class="card-img-top" src="{{ job.image.url }}" alt="Card image cap">
-              <div class="card-body">
-                <p class="card-text">{{ job.summary }}</p>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
+      {% endfor %}
     </div>
-
   </main>
 
   <footer class="text-muted">
